@@ -1,7 +1,6 @@
 # A list of TODOs
  - make the my-utils thing accessible NICER than it is right now!!! (make use of submodules more??)
    OBSERVE how config.nix in handled!!!
- - address the WARNINGS!!!
  - make a `packages` overlay that simply overlays any packages in the `/packages` folder
    (see nixos-config example for this) + minimal "my hello" package or something (to test)...
  - set up windowing manager to support wayland + GNOME
