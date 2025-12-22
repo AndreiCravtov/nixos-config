@@ -7,7 +7,7 @@
   inherit (flake.inputs.self.debug._module.args) root;
   flakeExpr = "(builtins.getFlake \"${root}\")";
 in {
-  programs.vscode = {
+  programs.vscode.profiles.default = {
     userSettings = {
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nixd";

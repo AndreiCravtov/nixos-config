@@ -1,10 +1,9 @@
 {pkgs, ...}: {
-  services.xserver = {
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-  };
+  # Enable the GNOME Desktop Environment.
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   environment.systemPackages = with pkgs; [
-    pkgs.gnome-tweaks
+    gnome-tweaks
   ];
 }

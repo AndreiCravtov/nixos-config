@@ -5,5 +5,5 @@
   inherit (inputs) self;
 in
   self: super: {
-    omnix = inputs.omnix-pr489.packages.${self.system}.default;
+    omnix = inputs.omnix-pr489.packages.${self.stdenv.hostPlatform.system}.default;
   }

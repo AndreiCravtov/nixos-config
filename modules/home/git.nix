@@ -10,13 +10,16 @@ in {
   programs = {
     git = {
       enable = true;
-      userName = config.me.gitFullName;
-      userEmail = config.me.gitEmail;
       ignores = ["*~" "*.swp"];
-      aliases = {
-        ci = "commit";
-      };
-      extraConfig = {
+
+      settings = {
+        user = {
+          name = config.me.gitFullName;
+          email = config.me.gitEmail;
+        };
+        alias = {
+          # ci = "commit";
+        };
         # init.defaultBranch = "master";
         # pull.rebase = "false";
       };
