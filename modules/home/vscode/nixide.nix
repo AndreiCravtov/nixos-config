@@ -24,7 +24,7 @@ in {
           #                 Package documentation, versions, are evaluated by-need.
           "nixpkgs" = {
             # TODO: use the version with all overlays applied!!!!!!!!!!!!!!!!!!
-            "expr" = "import ${flakeExpr}.inputs.nixpkgs { }";
+            "expr" = "${flakeExpr}.currentSystem._module.args.pkgs";
           };
 
           # Define option sets (flake-parts, nixos, home-manager, etc.) for the language server to autocomplete.
