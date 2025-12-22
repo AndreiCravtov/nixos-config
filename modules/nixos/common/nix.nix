@@ -27,7 +27,6 @@ in {
     registry.nixpkgs.flake = flake.inputs.nixpkgs; # Make `nix shell` etc use pinned nixpkgs
 
     settings = {
-      max-jobs = "auto";
       experimental-features = ["nix-command" "flakes"];
       # Nullify the registry for purity.
       flake-registry = builtins.toFile "empty-flake-registry.json" ''{"flakes":[],"version":2}'';

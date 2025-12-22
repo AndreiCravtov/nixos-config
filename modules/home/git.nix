@@ -1,4 +1,6 @@
-{config, ...}: {
+{flake, ...}: let
+  inherit (flake) config;
+in {
   home.shellAliases = {
     g = "git";
     lg = "lazygit";
@@ -8,8 +10,8 @@
   programs = {
     git = {
       enable = true;
-      userName = config.me.fullname;
-      userEmail = config.me.email;
+      userName = config.me.gitFullName;
+      userEmail = config.me.gitEmail;
       ignores = ["*~" "*.swp"];
       aliases = {
         ci = "commit";

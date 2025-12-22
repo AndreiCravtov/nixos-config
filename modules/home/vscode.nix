@@ -2,10 +2,16 @@
   flake,
   pkgs,
   ...
-}: {
+}: let
+  inherit (flake) inputs config;
+in {
   # Automatically import everything else in the ./vscode folder.
   # NOTE: cannot use `my-util.readDirPaths` due to recursion!!
-  imports = flake.config.flake.my-util.readDirPaths {readPath = ./vscode/.;};
+  imports = config.flake.my-util.readDirPaths {readPath = ./vscode/.;};
+
+  home.shellAliases = {
+    nixcode = "code ~/nixos/"; # hardcoded editor-launch command
+  };
 
   programs.vscode = {
     enable = true;
