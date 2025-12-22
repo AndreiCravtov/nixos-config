@@ -13,8 +13,21 @@
 in {
   options.flake.my-util = {
     readDirPaths = lib.mkOption {
-      description = "Read all paths in specified directory, except for the ones in the exclude-list.";
       type = ty.functionTo (ty.listOf ty.path);
+      description = ''
+        readDirPaths :: { readPath :: Path, exclude ? :: [String] } -> [Path];
+
+        Read all paths in specified directory, except for the ones in the exclude-list.
+      '';
+      readOnly = true;
+    };
+    guardMsg = lib.mkOption {
+      type = ty.functionTo ty.anything;
+      description = ''
+        guardMsg :: Bool -> String -> a -> a;
+
+        Throw `msg` if `pred` is false, else return `val`.
+      '';
       readOnly = true;
     };
   };
@@ -34,6 +47,11 @@ in {
           entries;
         in
           map (n: readPath + "/${n}") (attrNames wanted);
+
+      guardMsg = pred: msg: val:
+        if (lib.assertMsg pred msg)
+        then val
+        else {}; # Never reaches
     };
   };
 }
