@@ -10,6 +10,7 @@
     flake.inputs.self.nixosModules.common
   ];
 
+  programs.zsh.enable = true;
   services.openssh.enable = true;
 
   security = lib.optionalAttrs pkgs.stdenv.isLinux {

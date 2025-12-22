@@ -18,8 +18,8 @@
     matchBlocks = {
       # TODO: theres GOTTA be a better way to do this, look into [agenix](https://github.com/ryantm/agenix) maybe??
       "*" = {
-        addKeysToAgent = true;
-        itentityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
+        addKeysToAgent = "yes";
+        identityFile = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
       };
 
       # TODO: figure out how to make `cloudflared` work on NixOS
