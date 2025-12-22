@@ -30,8 +30,8 @@ in {
       #}
     ];
     extensions = with pkgs.vscode-marketplace; [
-      jnoortheen.nix-ide
       dracula-theme.theme-dracula
+      gruntfuggly.todo-tree
     ];
   };
 }

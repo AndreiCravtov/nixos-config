@@ -46,12 +46,6 @@
       E-mail of the user, for Git purposes.
     '';
   };
-  sshKey = lib.mkOption {
-    type = lib.types.str;
-    description = ''
-      SSH public key
-    '';
-  };
 in {
   imports = [
     ../../config.nix
@@ -66,7 +60,6 @@ in {
           userDescription = userDescription;
           gitFullName = gitFullName;
           gitEmail = gitEmail;
-          sshKey = sshKey;
         };
       };
     };

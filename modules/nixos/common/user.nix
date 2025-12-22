@@ -3,6 +3,7 @@
 {
   flake,
   lib,
+  pkgs,
   ...
 }: let
   inherit (flake) inputs config;
@@ -29,11 +30,12 @@
       the username `${config.me.username}` (specified in repo-root's config.nix).
     '';
 in {
-  # Set up user description & user-groups
+  # Set up user description & user-groups, etc.
   users.users.${ensureConfigExists username} = {
     isNormalUser = true;
     description = lib.mkForce userDescription;
     extraGroups = ["networkmanager" "wheel"];
+    shell = pkgs.zsh;
   };
 
   # Enable home-manager for our user
