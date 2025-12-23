@@ -1,6 +1,7 @@
 {
   flake,
   pkgs,
+  lib,
   ...
 }: let
   inherit (flake) inputs config;
@@ -8,10 +9,11 @@
   root = inputs.self + /.;
   flakeExpr = "(builtins.getFlake \"${root}\")";
   nixosConfig = "${flakeExpr}.nixosConfigurations.${config.me.hostName}";
-in {
-  # Packages needed for this
-  home.packages = with pkgs; [nixd alejandra];
 
+  # Packages needed for this
+  nixd = lib.getExe pkgs.nixd;
+  alejandra = lib.getExe pkgs.alejandra;
+in {
   programs.vscode.profiles.default = {
     # NixIDE extension
     extensions = [pkgs.vscode-marketplace.jnoortheen.nix-ide];
@@ -19,11 +21,11 @@ in {
     # NixIDE extension configurations
     userSettings = {
       "nix.enableLanguageServer" = true;
-      "nix.serverPath" = "nixd";
+      "nix.serverPath" = nixd;
       "nix.serverSettings" = {
         "nixd" = {
           "formatting" = {
-            "command" = ["alejandra"];
+            "command" = [alejandra];
           };
 
           # This expression will be interpreted as "nixpkgs" toplevel
