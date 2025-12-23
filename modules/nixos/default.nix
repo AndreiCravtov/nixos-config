@@ -10,10 +10,17 @@
   # NOTE: cannot use `my-util.readDirPaths` due to recursion!!
   imports = flake.config.flake.my-util.readDirPaths {readPath = ./.;};
 
-  programs.zsh.enable = true;
+  # Disable documentation app
+  documentation.doc.enable = false;
+
+  # Enable SSH systemwide
   services.openssh.enable = true;
 
+  # Apply systemwide security hardening
   security = lib.optionalAttrs pkgs.stdenv.isLinux {
     sudo.execWheelOnly = true;
   };
+
+  # Enable ZSH systemwide
+  programs.zsh.enable = true;
 }
