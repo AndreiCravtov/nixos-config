@@ -3,9 +3,12 @@
    OBSERVE how config.nix in handled!!!
  - make a `packages` overlay that simply overlays any packages in the `/packages` folder
    (see nixos-config example for this) + minimal "my hello" package or something (to test)...
+
+### Shell
  - break up `shell.nix` into OPTION GUARDED folder of modules, one file for each shell
  - + then dependencies on shell integration (e.g. `programs.nix-index.enableZshIntegration`)
      can be guarded behind a `mkIf config.zsh.enabled` or something like that ??
+ - configure kitty & friends
 
 ### System settings
  - gnome extensions
