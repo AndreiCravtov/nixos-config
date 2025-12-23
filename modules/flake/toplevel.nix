@@ -20,8 +20,16 @@
     # So we must do this manually; https://flake.parts/overlays#consuming-an-overlay
     _module.args.pkgs = import inputs.nixpkgs {
       inherit system;
+
+      # Permissive w.r.t. allowed packages
+      config = {
+        allowBroken = true;
+        allowUnsupportedSystem = true;
+        allowUnfree = true;
+      };
+
+      # Apply all (autowired) overlays
       overlays = lib.attrValues inputs.self.overlays;
-      config.allowUnfree = true;
     };
 
     # For 'nix fmt'
