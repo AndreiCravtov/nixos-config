@@ -15,7 +15,6 @@
  - default apps e.g. default browser = brave
 
 ### VSCode
- - rework the vscode structure to use a `default.nix` within folder rather than `vscode.nix`+`./vscode` combo
  - continue fixing nixd!! => right now it has access to the overlays, but the overlays are instantiated TWICE!!!
  - + once in toplevel (flake pkgs) and once in nix.nix (nixos) => figure out which one of those it makes sense to use!!
  - + also the flakes options (non-perSystem) are just not working very well... => make work

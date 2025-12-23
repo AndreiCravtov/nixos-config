@@ -1,13 +1,22 @@
 {
   flake,
   pkgs,
-  config,
   ...
 }: let
-  inherit (flake.inputs.self.debug._module.args) root;
+  inherit (flake) inputs config;
+
+  root = inputs.self + /.;
   flakeExpr = "(builtins.getFlake \"${root}\")";
+  nixosConfig = "${flakeExpr}.nixosConfigurations.${config.me.hostName}";
 in {
+  # Packages needed for this
+  home.packages = with pkgs; [nixd alejandra];
+
   programs.vscode.profiles.default = {
+    # NixIDE extension
+    extensions = [pkgs.vscode-marketplace.jnoortheen.nix-ide];
+
+    # NixIDE extension configurations
     userSettings = {
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nixd";
@@ -23,8 +32,7 @@ in {
           # Resource Usage: Entries are lazily evaluated, entire nixpkgs takes 200~300MB for just "names".
           #                 Package documentation, versions, are evaluated by-need.
           "nixpkgs" = {
-            # TODO: use the version with all overlays applied!!!!!!!!!!!!!!!!!!
-            "expr" = "${flakeExpr}.currentSystem._module.args.pkgs";
+            "expr" = "${nixosConfig}.pkgs";
           };
 
           # Define option sets (flake-parts, nixos, home-manager, etc.) for the language server to autocomplete.
@@ -32,21 +40,12 @@ in {
           "options" = {
             # If this is ommited, default search path (<nixpkgs>) will be used.
             "nixos" = {
-              # This name "nixos" could be arbitary.
-              # The expression to eval, intepret it as option declarations.
-              # TODO: figure out a way to wire `framework13` host more correctly!!!
-              #       e.g. I need to propogate the following:
-              #            -> hostname
-              #            -> username
-              #            -> user display name
-              #            -> git name
-              #            -> git email
-              "expr" = "${flakeExpr}.nixosConfigurations.framework13.options";
+              "expr" = "${nixosConfig}.options";
             };
 
             # By default there is no home-manager options completion, thus you can add this entry.
             "home-manager" = {
-              "expr" = "${flakeExpr}.nixosConfigurations.framework13.options.home-manager.users.type.getSubOptions []";
+              "expr" = "${nixosConfig}.options.home-manager.users.type.getSubOptions []";
             };
 
             # For flake-parts options.
@@ -64,6 +63,5 @@ in {
         };
       };
     };
-    extensions = [pkgs.vscode-marketplace.jnoortheen.nix-ide];
   };
 }

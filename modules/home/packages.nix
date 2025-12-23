@@ -15,8 +15,6 @@
     # Nix dev
     cachix
     nix-info
-    nixd # Nix language server
-    alejandra
 
     # On ubuntu, we need this less for `man home-configuration.nix`'s pager to
     # work.
