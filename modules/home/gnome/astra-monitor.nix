@@ -23,6 +23,9 @@
     };
     "org/gnome/shell/extensions/astra-monitor" = {
       gpu-header-show = true;
+      memory-header-tooltip-free = true;
+      storage-header-tooltip-value = true;
+      sensors-header-show = true;
     };
   };
 
