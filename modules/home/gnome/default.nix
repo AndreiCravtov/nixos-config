@@ -17,7 +17,10 @@ in {
 
   # List of extensions to enable
   home.packages = with pkgs.gnomeExtensions; [
-    blur-my-shell
+    # common dependencies needed by extensions
+    pkgs.gjs
+
+    # extensions
     clipboard-history
     color-picker
     desktop-icons-ng-ding
@@ -35,7 +38,6 @@ in {
         "color-picker@tuberry"
         "appindicatorsupport@rgcjonas.gmail.com"
         "power-off-options@axelitama.github.io"
-        "blur-my-shell@aunetx"
         "clipboard-history@alexsaveau.dev"
         "ding@rastersoft.com"
       ];

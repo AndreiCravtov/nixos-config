@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   # Install required dependencies
   home.packages = with pkgs; [
     nethogs
