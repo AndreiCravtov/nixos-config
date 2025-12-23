@@ -7,9 +7,9 @@
 
     # Unix tools
     ripgrep # Better `grep`
-    fd
-    sd
-    tree
+    fd # Better `find`
+    sd # Better `sed`
+    lsd # Better `ls` and `tree`
     gnumake
 
     # Nix dev

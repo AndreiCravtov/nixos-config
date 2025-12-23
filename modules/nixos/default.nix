@@ -6,9 +6,9 @@
   pkgs,
   ...
 }: {
-  imports = [
-    flake.inputs.self.nixosModules.common
-  ];
+  # A module that automatically imports everything else in the parent folder.
+  # NOTE: cannot use `my-util.readDirPaths` due to recursion!!
+  imports = flake.config.flake.my-util.readDirPaths {readPath = ./.;};
 
   programs.zsh.enable = true;
   services.openssh.enable = true;
