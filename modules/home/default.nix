@@ -1,5 +1,10 @@
-{flake, ...}: let
-  inherit (flake) config;
+{
+  flake,
+  lib,
+  ...
+}: let
+  inherit (flake) inputs config;
+  inherit (inputs.self) homeModules;
 in {
   # A module that automatically imports everything else in the parent folder.
   # NOTE: cannot use `my-util.readDirPaths` due to recursion!!

@@ -38,11 +38,20 @@ in {
         exclude ? ["default.nix"],
       }:
         with builtins; let
-          entries = readDir readPath;
-          wanted = lib.filterAttrs (n: v:
+          isNixFile = n: v:
             v
             == "regular"
-            && lib.strings.hasSuffix ".nix" n
+            && lib.strings.hasSuffix ".nix" n;
+          isNixDir = n: v:
+            v
+            == "directory"
+            && (let
+              subEntries = readDir (readPath + /${n});
+            in
+              hasAttr "default.nix" subEntries && subEntries."default.nix" == "regular");
+          entries = readDir readPath;
+          wanted = lib.filterAttrs (n: v:
+            ((isNixFile n v) || (isNixDir n v))
             && !(elem n exclude))
           entries;
         in
