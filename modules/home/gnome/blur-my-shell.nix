@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   # Install required dependencies
   home.packages = with pkgs; [
     gnomeExtensions.blur-my-shell
@@ -17,9 +22,9 @@
       dynamic-opacity = false;
       blur-on-overview = true;
 
-      # TODO: condition on kitty being enabled!!!?? or perhaps even invert and add to kitty configs???
-      whitelist = [
-        "kitty"
+      # Add applications we want to blur
+      whitelist = lib.mkMerge [
+        (lib.mkIf config.programs.kitty.enable ["kitty"])
         # TODO: add `vesktop` after vesktop has been configured too!!
       ];
     };
