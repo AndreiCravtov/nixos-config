@@ -17,15 +17,8 @@ in {
 
   # List of extensions to enable
   home.packages = with pkgs.gnomeExtensions; [
-    # common dependencies needed by extensions
-    pkgs.gjs
-
-    # extensions
     clipboard-history
     color-picker
-    # desktop-icons-ng-ding
-    gnome-she
-    gtk4-desktop-icons-ng-ding
     appindicator
     launch-new-instance
     power-off-options
@@ -41,8 +34,6 @@ in {
         "appindicatorsupport@rgcjonas.gmail.com"
         "power-off-options@axelitama.github.io"
         "clipboard-history@alexsaveau.dev"
-        # "ding@rastersoft.com"
-        "gtk4-ding@smedius.gitlab.com"
       ];
     };
   };

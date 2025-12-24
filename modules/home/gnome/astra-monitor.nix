@@ -26,7 +26,9 @@
   };
 
   # SEE: https://github.com/fflewddur/tophat/issues/106#issuecomment-1848319826
+  # TODO: figure out a better way -> either create merge-able path types
+  #       OR patch the corresponding extensions to have these paths set correctly
   systemd.user.sessionVariables = {
-    GI_TYPELIB_PATH = pkgs.libgtop + "/lib/girepository-1.0/";
+    GI_TYPELIB_PATH = "${pkgs.libgtop + "/lib/girepository-1.0/"}";
   };
 }
