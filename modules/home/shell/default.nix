@@ -1,4 +1,16 @@
-{...}: {
+{
+  flake,
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  inherit (flake.config.flake) my-util;
+in {
+  # A module that automatically imports everything else in the parent folder.
+  # NOTE: cannot use `my-util.readDirPaths` due to recursion!!
+  imports = my-util.readDirPaths {readPath = ./.;};
+
   programs = {
     # on macOS, you probably don't need this
     bash = {

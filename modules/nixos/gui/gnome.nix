@@ -21,7 +21,7 @@
     gnome-contacts
     epiphany # Web browser
     geary # Email reader
-    # gnome-console TODO: disable this eventually (when kitty made default)
+    gnome-console # Replaced with `kitty`
   ];
 
   # Enable GNOME configurability and apps
