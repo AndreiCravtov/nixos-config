@@ -35,6 +35,7 @@
     starship = {
       enable = true;
       settings = {
+        add_newline = false;
         username = {
           style_user = "blue bold";
           style_root = "red bold";

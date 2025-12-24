@@ -16,8 +16,6 @@ in {
     # Integrations
     enableGitIntegration = config.programs.git.enable;
     shellIntegration = with config.programs; {
-      # mode = "no-cursor";
-
       enableBashIntegration = bash.enable;
       enableZshIntegration = zsh.enable;
       enableFishIntegration = fish.enable;
@@ -30,24 +28,30 @@ in {
     '';
     # themeFile = "SpaceGray_Eighties";
 
-    settings = {
-      # scrollback_lines = 10000;
-      # enable_audio_bell = false;
-      # update_check_interval = 0;
+    # Set font => JetBrainsMono nerd font
+    font = {
+      package = pkgs.nerd-fonts.jetbrains-mono;
+      name = "JetBrainsMono Nerd Font Mono";
+      size = 12;
     };
 
-    # themeFile = "SpaceGray_Eighties";
-
-    # font = ;
-
     actionAliases = {
-      # "launch_tab" = "launch --cwd=current --type=tab";
-      # "launch_window" = "launch --cwd=current --type=os-window";
+      # Resize OS-window
+      resize_os_window = "remote_control resize-os-window --self --incremental";
     };
 
     keybindings = {
-      # "ctrl+c" = "copy_or_interrupt";
-      # "ctrl+f>2" = "set_font_size 20";
+      # Resize OS-window with arrow keys
+      "super+ctrl+up" = "resize_os_window --height -1";
+      "super+ctrl+down" = "resize_os_window --height 1";
+      "super+ctrl+left" = "resize_os_window --width -1";
+      "super+ctrl+right" = "resize_os_window --width 1";
+
+      # Resize OS-window with Vim-like `JKL;`
+      "super+ctrl+k" = "resize_os_window --height -1";
+      "super+ctrl+l" = "resize_os_window --height 1";
+      "super+ctrl+j" = "resize_os_window --width -1";
+      "super+ctrl+;" = "resize_os_window --width 1";
     };
 
     mouseBindings = {
@@ -55,14 +59,39 @@ in {
       # "left click" = "ungrabbed no-op";
     };
 
-    environment = {
-      # "LS_COLORS" = "1";
+    settings = {
+      # Window setting
+      hide_window_decorations = "yes";
+      background_opacity = 0.65;
+      show_hyperlink_targets = "yes";
+      cursor_trail = 1;
+
+      # Tab bar
+      tab_bar_min_tabs = 1;
+      tab_bar_style = "powerline";
+      tab_powerline_style = "round";
+      tab_title_template = "{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.tab}{title}{sub.index}";
+
+      # Scroll/bar
+      scrollback_lines = 100000;
+      scrollbar = "scrolled";
+      scrollbar_interactive = "yes";
+      scrollbar_jump_on_click = "yes";
+      scrollbar_width = 0.75;
+      scrollbar_hover_width = 1;
+
+      # No updates
+      update_check_interval = 0;
     };
 
     quickAccessTerminalConfig = {
       # start_as_hidden = false;
       # hide_on_focus_loss = false;
       # background_opacity = 0.85;
+    };
+
+    environment = {
+      # "LS_COLORS" = "1";
     };
   };
 }
