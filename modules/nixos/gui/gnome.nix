@@ -24,13 +24,15 @@
     # gnome-console TODO: disable this eventually (when kitty made default)
   ];
 
-  # Enable gnome configurability and apps
+  # Enable GNOME configurability and apps
   programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [
-    # Some extensions may need this
-    gjs
+    gjs # Some extensions may need this
 
     gnome-tweaks
     appeditor
   ];
+
+  # GNOME nautilus extensions
+  programs.nautilus-open-any-terminal.enable = true;
 }

@@ -25,11 +25,15 @@ in {
   ];
 
   dconf.settings = with lib.hm.gvariant; {
+    # GNOME settings app
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
     };
     "org/gnome/mutter" = {
       workspaces-only-on-primary = false;
+      experimental-features = [
+        "scale-monitor-framebuffer" # Allows fractional scaling
+      ];
     };
     "org/gnome/desktop/input-sources" = {
       sources = [
@@ -39,7 +43,7 @@ in {
       xkb-options = ["compose:rwin"];
     };
 
-    # Enable extensions
+    # Enable GNOME extensions
     "org/gnome/shell" = {
       disable-user-extensions = false;
       enabled-extensions = [
@@ -49,6 +53,11 @@ in {
         "power-off-options@axelitama.github.io"
         "clipboard-history@alexsaveau.dev"
       ];
+    };
+
+    # GNOME nautilus settings
+    "org/gtk/gtk4/settings/file-chooser" = {
+      show-hidden = true;
     };
   };
 }

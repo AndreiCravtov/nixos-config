@@ -1,6 +1,7 @@
 {
   flake,
   pkgs,
+  lib,
   config,
   ...
 }: let
@@ -60,25 +61,39 @@ in {
     };
 
     settings = {
-      # Window setting
+      # Layout settings: enable all layouts, tall by default
+      enabled_layouts = lib.strings.concatStringsSep "," [
+        "tall"
+        "fat"
+        "grid"
+        "horizontal"
+        "splits"
+        "stack"
+        "vertical"
+      ];
+
+      # Window display setting
       hide_window_decorations = "yes";
       background_opacity = 0.65;
       show_hyperlink_targets = "yes";
       cursor_trail = 1;
 
-      # Tab bar
+      # Tab bar style settings
       tab_bar_min_tabs = 1;
       tab_bar_style = "powerline";
       tab_powerline_style = "round";
       tab_title_template = "{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.tab}{title}{sub.index}";
 
-      # Scroll/bar
+      # Scroll/bar display settings
       scrollback_lines = 100000;
       scrollbar = "scrolled";
       scrollbar_interactive = "yes";
       scrollbar_jump_on_click = "yes";
-      scrollbar_width = 0.75;
-      scrollbar_hover_width = 1;
+      scrollbar_width = 0.5;
+      scrollbar_radius = 0.45; # less than scrollbar width
+      scrollbar_hover_width = 0.75;
+      scrollbar_gap = 0.2;
+      scrollbar_handle_opacity = 0.35;
 
       # No updates
       update_check_interval = 0;
@@ -92,6 +107,27 @@ in {
 
     environment = {
       # "LS_COLORS" = "1";
+    };
+  };
+
+  # Make default XDG terminal
+  # TODO: maybe gate behind "make default" option??
+  xdg.terminal-exec = {
+    enable = true;
+    settings = {
+      default = [
+        "kitty.desktop"
+      ];
+    };
+  };
+
+  # Make default GNOME nautilus terminal
+  # TODO: maybe gate behind Gnome nautilus being installed??
+  #       RN this config is (sort of) split across THIS file
+  #       and the ./nixos/gui/gnome.nix one where the extension is enabled
+  dconf.settings = {
+    "com/github/stunkymonkey/nautilus-open-any-terminal" = {
+      terminal = "kitty";
     };
   };
 }
