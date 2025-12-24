@@ -15,7 +15,7 @@ in {
     dconf-watch = "dconf watch /"; # Watch `dconf` settings change
   };
 
-  # List of extensions to enable
+  # List of extensions to install
   home.packages = with pkgs.gnomeExtensions; [
     clipboard-history
     color-picker
@@ -24,8 +24,22 @@ in {
     power-off-options
   ];
 
-  # Configure dconf settings
-  dconf.settings = {
+  dconf.settings = with lib.hm.gvariant; {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+    "org/gnome/mutter" = {
+      workspaces-only-on-primary = false;
+    };
+    "org/gnome/desktop/input-sources" = {
+      sources = [
+        (mkTuple ["xkb" "gb"])
+        (mkTuple ["xkb" "us"])
+      ];
+      xkb-options = ["compose:rwin"];
+    };
+
+    # Enable extensions
     "org/gnome/shell" = {
       disable-user-extensions = false;
       enabled-extensions = [
