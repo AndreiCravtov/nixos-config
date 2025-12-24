@@ -9,6 +9,9 @@
  - + for now we are stuck with no default extensions & having to copy everything from some kind of backup
  - + IF I EVER end up needing e.g. `vimium` then I HAVE to figure out a way to get it up and running...
  - Install jetbrains nerd fonts everywhere!! (& set for terminals + vscode + etc.)
+ - **VERY IMPORTANT**: there are these "fragmented" configurations happening across NixOS modules & home manager, e.g. `zsh`, `gnome`, `kitty`, etc. **NEED TO** figure out a coherent way to link them together
+ - + maybe making matching-named files in both?? e.g. `kitty` in both??
+ - + maybe make "super-modules" that touch __both__ home configurations AND nixos configurations?? It would __obviously__ have to be a NixOS module in that case which simply reaches into `home-manager.users.${username}.<HOME-MANAGER-SETTINGS>` when necessary??
 
 ### Shell
  - break up `shell.nix` into OPTION GUARDED folder of modules, one file for each shell
