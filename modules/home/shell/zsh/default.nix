@@ -42,7 +42,7 @@ in {
 
     plugins = with config; [
       # Better up/down-arrow history
-      # TODO: swap for `fzf-history-widget`
+      # TODO: swap for `fzf-history-widget` ??
       {
         name = "history-substring-search";
         src = ohmyzshPluginSrc "history-substring-search";

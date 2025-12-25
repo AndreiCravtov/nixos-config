@@ -22,6 +22,35 @@ magic-enter() {
   fi
 }
 
+# Helper: disable ysu for exactly one command, then re-enable at next prompt
+_magic_enter_ysu_suspend_once() {
+  local disable_fn enable_fn
+
+  # Current upstream names:
+  if (( $+functions[disable_you_should_use] && $+functions[enable_you_should_use] )); then
+    disable_fn=disable_you_should_use
+    enable_fn=enable_you_should_use
+
+  # If you really have these older/alternate names:
+  elif (( $+functions[you_should_use_disable] && $+functions[you_should_use_enable] )); then
+    disable_fn=you_should_use_disable
+    enable_fn=you_should_use_enable
+  else
+    return 0
+  fi
+
+  "$disable_fn"
+
+  autoload -Uz add-zsh-hook
+
+  # one-shot re-enable after the command finishes (next prompt)
+  _magic_enter_ysu_resume() {
+    add-zsh-hook -d precmd _magic_enter_ysu_resume 2>/dev/null || true
+    "$enable_fn"
+  }
+  add-zsh-hook precmd _magic_enter_ysu_resume
+}
+
 # Wrapper for the accept-line zle widget (run when pressing Enter)
 
 # If the wrapper already exists don't redefine it
@@ -31,12 +60,29 @@ case "$widgets[accept-line]" in
   # Override the current accept-line widget, calling the old one
   user:*) zle -N _magic-enter_orig_accept-line "${widgets[accept-line]#user:}"
     function _magic-enter_accept-line() {
+      local orig_buffer=$BUFFER
+      local orig_context=$CONTEXT
+
       magic-enter
+
+      # If magic-enter injected a command, suppress ysu for this one execution
+      if [[ -z $orig_buffer && $orig_context == start && -n $BUFFER ]]; then
+        _magic_enter_ysu_suspend_once
+      fi
+
       zle _magic-enter_orig_accept-line -- "$@"
     } ;;
   # If no user widget defined, call the original accept-line widget
   builtin) function _magic-enter_accept-line() {
+      local orig_buffer=$BUFFER
+      local orig_context=$CONTEXT
+
       magic-enter
+
+      if [[ -z $orig_buffer && $orig_context == start && -n $BUFFER ]]; then
+        _magic_enter_ysu_suspend_once
+      fi
+
       zle .accept-line
     } ;;
 esac
