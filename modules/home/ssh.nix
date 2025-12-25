@@ -5,11 +5,7 @@
   ...
 }: {
   # Make sure ssh-agent is running
-  services.ssh-agent = {
-    enable = true;
-    enableBashIntegration = false;
-    enableZshIntegration = false;
-  };
+  services.ssh-agent.enable = true;
 
   # Declare `~/.ssh/config` declaratively via matchBlocks
   programs.ssh = {

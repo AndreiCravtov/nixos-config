@@ -16,11 +16,6 @@ in {
 
     # Integrations
     enableGitIntegration = config.programs.git.enable;
-    shellIntegration = with config.programs; {
-      enableBashIntegration = bash.enable;
-      enableZshIntegration = zsh.enable;
-      enableFishIntegration = fish.enable;
-    };
 
     # Local theme file must be included manually
     # (themeFile option only works for themes in `pkgs.kitty-themes`)

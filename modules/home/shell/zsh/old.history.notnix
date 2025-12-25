@@ -1,0 +1,68 @@
+# README:
+#  - I've already patched this, this file is here just for the useful code
+#  - it doesn't actually contribute to the config
+#
+# Configuration relating to history & history plugins
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  # Copied from https://github.com/nix-community/home-manager/blob/master/modules/programs/zsh/lib.nix
+  cfg = config.programs.zsh;
+  homeDir = config.home.homeDirectory;
+  cleanPathStr = pathStr: lib.escapeShellArg (lib.removeSuffix "/" pathStr);
+  mkAbsPathStr = pathStr: cleanPathStr ((lib.optionalString (!lib.hasPrefix "/" pathStr) "${homeDir}/") + pathStr);
+  dotDirAbs = mkAbsPathStr cfg.dotDir;
+  pluginsDir = dotDirAbs + (lib.optionalString (homeDir == dotDirAbs) "/.zsh") + "/plugins";
+
+  # Define plugin manually
+  mkHomeFile = plugin: {"${pluginsDir}/${plugin.name}".source = plugin.src;};
+  mkPathInit = plugin: ''
+    # Add ${plugin.name} to PATH and fpath
+    path+="${pluginsDir}/${plugin.name}"
+    fpath+="${pluginsDir}/${plugin.name}"
+  '';
+  mkSourceInit = plugin: let
+    pluginPath = "${pluginsDir}/${plugin.name}/${plugin.file}";
+  in ''
+    # Source ${plugin.name}
+    [[ -f "${pluginPath}" ]] && source "${pluginPath}"
+  '';
+  history-substring-search = {
+    name = "zsh-history-substring-search";
+    src = "${pkgs.zsh-history-substring-search}/share/zsh/plugins/zsh-history-substring-search";
+    file = "${history-substring-search.name}.plugin.zsh";
+    homeFile = mkHomeFile history-substring-search;
+    pathInit = mkPathInit history-substring-search;
+    sourceInit = mkSourceInit history-substring-search;
+  };
+in {
+  # Instantiate manually applied plugins
+  home.file = history-substring-search.homeFile;
+
+  # Add manually applied plugins to .zshrc at manually specified locations
+  programs.zsh.initContent = lib.mkMerge [
+    (lib.mkOrder 560 history-substring-search.pathInit)
+    (lib.mkOrder 1300 history-substring-search.sourceInit)
+
+    # Additional bindings and settings
+    (lib.mkAfter ''
+      # zsh-history-substring-search configuration
+      # SEE: https://github.com/zsh-users/zsh-history-substring-search
+      HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+      HISTORY_SUBSTRING_SEARCH_FUZZY=1
+
+      ## Bind terminal-specific up and down keys
+      if [[ -n "$terminfo[kcuu1]" ]]; then
+        bindkey -M emacs "$terminfo[kcuu1]" history-substring-search-up
+        bindkey -M viins "$terminfo[kcuu1]" history-substring-search-up
+      fi
+      if [[ -n "$terminfo[kcud1]" ]]; then
+        bindkey -M emacs "$terminfo[kcud1]" history-substring-search-down
+        bindkey -M viins "$terminfo[kcud1]" history-substring-search-down
+      fi
+    '')
+  ];
+}

@@ -19,6 +19,8 @@
      can be guarded behind a `mkIf config.zsh.enabled` or something like that ??
  - configure kitty & friends
  - + make Kitty default for Gnome, i.e. "open kitty here" in nautilus
+ - BUG: Cannot use CTRL+<ARROW> navigation in terminal?? In fedora I can CTRL+<ARROW> to quicly navigate back and forward
+ - Nushell ?????
 
 ### System settings
  - default apps e.g. default browser = brave

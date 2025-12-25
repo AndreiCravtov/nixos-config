@@ -11,7 +11,6 @@ in {
     git = {
       enable = true;
       ignores = ["*~" "*.swp"];
-
       settings = {
         user = {
           name = config.me.gitFullName;
