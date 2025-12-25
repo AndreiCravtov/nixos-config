@@ -37,10 +37,10 @@ in {
     };
 
     plugins = with config; [
-      # remind me of aliases
+      # Better up/down-arrow history
       {
-        name = "you-should-use";
-        src = "${pkgs.zsh-you-should-use}/share/zsh/plugins/you-should-use";
+        name = "history-substring-search";
+        src = ohmyzshPluginSrc "history-substring-search";
       }
 
       # fuzzy-find tab completion
@@ -53,16 +53,35 @@ in {
         src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
       }
 
+      # Remind me of aliases
       {
-        name = "history-substring-search";
-        src = ohmyzshPluginSrc "history-substring-search";
+        name = "you-should-use";
+        src = "${pkgs.zsh-you-should-use}/share/zsh/plugins/you-should-use";
       }
 
-      # Git integration
+      # Empty-enter executes default commands
+      {
+        name = "magic-enter";
+        src = ohmyzshPluginSrc "magic-enter";
+      }
+
+      # Git aliases
       (lib.mkIf programs.git.enable {
         name = "git";
         src = ohmyzshPluginSrc "git";
       })
+    ];
+
+    initContent = lib.mkMerge [
+      # Configure keybindings to enable navigation
+      (lib.mkAfter (builtins.readFile ./key-bindings.zsh))
+
+      (lib.mkAfter ''
+        # Configure `magic-enter` to use aliases so that `you-should-use` does not complain erroneously
+        MAGIC_ENTER_GIT_COMMAND="gst -u ."          # `git status` => `gst`
+        MAGIC_ENTER_JJ_COMMAND="jj st --no-pager ." # NONE
+        MAGIC_ENTER_OTHER_COMMAND="lsd -lh ."       # NONE
+      '')
     ];
 
     # antidote plugins
@@ -72,18 +91,10 @@ in {
     #     [
     #       # OhMyZsh framework integration
     #       # TODO: most of these plugins shouldn't need OhMyZsh
-    #       #       -> custom keybindings (or setting env variables like PAGER/MANPAGER??)
-    #       ''
-    #         ohmyzsh/ohmyzsh path:lib/key-bindings.zsh             # allows for CTRL+L/R navigation
-    #         ohmyzsh/ohmyzsh path:plugins/history-substring-search # better up-arrow history search
-
-    #         # FIXME: right now the default commangs causes `zsh-you-should-use` to complain;
-    #         #        alter the defaults to use the aliases instead :)
-    #         ohmyzsh/ohmyzsh path:plugins/magic-enter              # empty-enter executes default commands
+    #       #       -> custom keybindings (or setting env variables like PAGER/MANPAGER??
+    #
     #       ''
     #     ]
-    #     (lib.mkIf git.enable ["ohmyzsh/ohmyzsh path:plugins/git"]) # git aliases
-
     #     # replace `cat` with `bat` & make `man` use `bat` too
     #     # TODO: make kitty use bat pager also?? `scrollback_pager` option
     #     (lib.mkIf bat.enable ["fdellwing/zsh-bat"])
