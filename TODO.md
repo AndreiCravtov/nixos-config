@@ -3,7 +3,6 @@
    OBSERVE how config.nix in handled!!!
  - make a `packages` overlay that simply overlays any packages in the `/packages` folder
    (see nixos-config example for this) + minimal "my hello" package or something (to test)...
- - make aliases for "better" commands e.g. `ls <- lsd` as a strictly better `ls`
  - + https://github.com/lsd-rs/lsd?tab=readme-ov-file#configuring-your-shell-to-use-lsd-instead-of-ls-optional
  - figure out a way to configure Brave browser extensions installation with `brave/policies/managed/chrome-policies.json`
  - + for now we are stuck with no default extensions & having to copy everything from some kind of backup
@@ -14,12 +13,6 @@
  - + maybe make "super-modules" that touch __both__ home configurations AND nixos configurations?? It would __obviously__ have to be a NixOS module in that case which simply reaches into `home-manager.users.${username}.<HOME-MANAGER-SETTINGS>` when necessary??
 
 ### Shell
- - break up `shell.nix` into OPTION GUARDED folder of modules, one file for each shell
- - + then dependencies on shell integration (e.g. `programs.nix-index.enableZshIntegration`)
-     can be guarded behind a `mkIf config.zsh.enabled` or something like that ??
- - configure kitty & friends
- - + make Kitty default for Gnome, i.e. "open kitty here" in nautilus
- - BUG: Cannot use CTRL+<ARROW> navigation in terminal?? In fedora I can CTRL+<ARROW> to quicly navigate back and forward
  - Nushell ?????
 
 ### System settings

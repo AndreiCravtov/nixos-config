@@ -11,10 +11,19 @@ in {
   # NOTE: cannot use `my-util.readDirPaths` due to recursion!!
   imports = config.flake.my-util.readDirPaths {readPath = ./.;};
 
-  # Install fonts for user
-  fonts.fontconfig.enable = true;
+  # Nix packages to install to $HOME
+  #
+  # Search for packages here: https://search.nixos.org/packages
   home.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
+    omnix
+
+    # Unix tools
+    gnumake
+    usbutils # TODO: maybe better as part of system packages??
+
+    # Nix dev
+    cachix
+    nix-info
   ];
 
   # Set username based on global config

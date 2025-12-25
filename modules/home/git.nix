@@ -2,7 +2,6 @@
   inherit (flake) config;
 in {
   home.shellAliases = {
-    g = "git";
     lg = "lazygit";
   };
 

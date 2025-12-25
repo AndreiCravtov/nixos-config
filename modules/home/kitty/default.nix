@@ -19,6 +19,7 @@ in {
 
     # Local theme file must be included manually
     # (themeFile option only works for themes in `pkgs.kitty-themes`)
+    # TODO: fix broken colors (e.g. some things are black when they should not be)
     extraConfig = ''
       include ${./current-theme.conf}
     '';

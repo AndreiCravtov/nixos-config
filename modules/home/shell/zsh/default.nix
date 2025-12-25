@@ -22,6 +22,7 @@ in {
   # Dependencies
   programs.fzf.enable = true;
   programs.eza.enable = true;
+  programs.zoxide.enable = true;
 
   # Configuration
   programs.zsh = {
@@ -41,8 +42,6 @@ in {
     };
 
     plugins = with config; [
-      # Better up/down-arrow history
-      # TODO: swap for `fzf-history-widget` ??
       {
         name = "history-substring-search";
         src = ohmyzshPluginSrc "history-substring-search";
@@ -81,22 +80,5 @@ in {
         # Configure `fzf-tab` plugin
         (lib.mkAfter (readFile ./fzf-tab.zsh))
       ];
-
-    # antidote plugins
-    # antidote = {
-    #   enable = true;
-    #   plugins = lib.mkMerge (with config.programs; [
-    #     [
-    #       # OhMyZsh framework integration
-    #       # TODO: most of these plugins shouldn't need OhMyZsh
-    #       #       -> custom keybindings (or setting env variables like PAGER/MANPAGER??
-    #
-    #       ''
-    #     ]
-    #     # replace `cat` with `bat` & make `man` use `bat` too
-    #     # TODO: make kitty use bat pager also?? `scrollback_pager` option
-    #     (lib.mkIf bat.enable ["fdellwing/zsh-bat"])
-    #   ]);
-    # };
   };
 }

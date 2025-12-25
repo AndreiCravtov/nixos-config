@@ -18,24 +18,35 @@ in {
   programs.bash.enable = true;
 
   # Better UNIX shell commands
-  programs.zoxide.enable = true; # Better `cd`
-  programs.bat = {
-    enable = true; # Better `cat`
-    # TODO: syntax/style config??
+  home.shellAliases = {
+    # cd = "z"; # This feels wrong...
+    tree = "eza --tree";
+    grep = "rg -uuu";
   };
-  programs.eza = {
-    enable = true; # Better `ls` (and `tree` if configured)
-    icons = "always";
-    colors = "always";
-    git = true;
-    extraOptions = ["--group-directories-first" "--header"];
+  home.packages = with pkgs; [
+    sd # Better `sed`
+  ];
+  programs = {
+    zoxide.enable = true; # Better `cd`
+    eza = {
+      enable = true; # Better `ls` (and `tree` if configured)
+      icons = "always";
+      colors = "always";
+      git = true;
+      extraOptions = ["--group-directories-first" "--header"];
+    };
+    ripgrep.enable = true; # Better `grep`
+    fd.enable = true; # Better `find`
+    jq.enable = true; # `sed` for JSON data
   };
 
   # Making working with the shell nicer
-  programs.pay-respects.enable = true;
-  programs.fzf = {
-    enable = true;
-    # TODO: further config ??
+  programs = {
+    pay-respects.enable = true;
+    fzf = {
+      enable = true; # Type `<ctrl> + r` to fuzzy search your shell history
+      # TODO: further config ?? themes ?? settings ??
+    };
   };
 
   programs = {
