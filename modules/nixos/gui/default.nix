@@ -8,4 +8,7 @@
 
   # Exclude some (default) X11 apps
   services.xserver.excludePackages = [pkgs.xterm];
+
+  # Wayland Ozone - makes chromium work
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }

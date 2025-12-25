@@ -15,12 +15,12 @@
 ### Shell
  - Nushell ?????
 
-### System settings
- - default apps e.g. default browser = brave
-
 ### VSCode
  - keep configuring VSCode in general
  - + default shell `zsh`
+
+### Language toolchains
+ - haskell/python/ruby/
 
 ## Partially DONE
  - DONE: set up SSH + Git

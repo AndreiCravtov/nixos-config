@@ -30,12 +30,15 @@
       the username `${config.me.username}` (specified in repo-root's config.nix).
     '';
 in {
+  # Enable ZSH systemwide
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+
   # Set up user description & user-groups, etc.
   users.users.${ensureConfigExists username} = {
     isNormalUser = true;
     description = lib.mkForce userDescription;
     extraGroups = ["networkmanager" "wheel"];
-    shell = pkgs.zsh;
   };
 
   # Enable home-manager for our user

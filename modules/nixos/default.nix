@@ -13,14 +13,45 @@
   # Disable documentation app
   documentation.doc.enable = false;
 
-  # Enable SSH systemwide
-  services.openssh.enable = true;
+  services = {
+    # Enable SSH systemwide
+    openssh.enable = true;
+
+    # Enable firmware updates
+    fwupd.enable = true;
+
+    # Enable lldpd for LLDP discovery
+    lldpd.enable = true;
+  };
+
+  # Dynamically linked libraries for unpackaged software
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      ## Put here any library that is required when running a package
+      ## ...
+      ## Uncomment if you want to use the libraries provided by default in the steam distribution
+      ## but this is quite far from being exhaustive
+      ## https://github.com/NixOS/nixpkgs/issues/354513
+      # (pkgs.runCommand "steamrun-lib" {} "mkdir $out; ln -s ${pkgs.steam-run.fhsenv}/usr/lib64 $out/lib")
+    ];
+  };
+
+  # Systemwide packages to install
+  environment.systemPackages = with pkgs; [
+    usbutils
+    lshw
+    wget
+    openssl
+    pkg-config
+    gnumake
+    gcc
+    clang
+    rustup
+  ];
 
   # Apply systemwide security hardening
   security = lib.optionalAttrs pkgs.stdenv.isLinux {
     sudo.execWheelOnly = true;
   };
-
-  # Enable ZSH systemwide
-  programs.zsh.enable = true;
 }

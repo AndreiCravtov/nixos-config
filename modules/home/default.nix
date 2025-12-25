@@ -17,10 +17,6 @@ in {
   home.packages = with pkgs; [
     omnix
 
-    # Unix tools
-    gnumake
-    usbutils # TODO: maybe better as part of system packages??
-
     # Nix dev
     cachix
     nix-info
