@@ -23,6 +23,13 @@ in {
     enable = true; # Better `cat`
     # TODO: syntax/style config??
   };
+  programs.eza = {
+    enable = true; # Better `ls` (and `tree` if configured)
+    icons = "always";
+    colors = "always";
+    git = true;
+    extraOptions = ["--group-directories-first" "--header"];
+  };
 
   # Making working with the shell nicer
   programs.pay-respects.enable = true;
@@ -35,6 +42,7 @@ in {
     # Better shell prompt!
     starship = {
       enable = true;
+      enableBashIntegration = false; # bash doesn't work well with this
       settings = {
         add_newline = false;
         username = {

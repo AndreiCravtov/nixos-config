@@ -9,7 +9,6 @@
     ripgrep # Better `grep`
     fd # Better `find`
     sd # Better `sed`
-    lsd # Better `ls` and `tree`
     gnumake
 
     # Nix dev

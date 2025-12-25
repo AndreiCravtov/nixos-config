@@ -19,11 +19,15 @@ in {
   # NOTE: cannot use `my-util.readDirPaths` due to recursion!!
   imports = my-util.readDirPaths {readPath = ./.;};
 
+  # Dependencies
+  programs.fzf.enable = true;
+  programs.eza.enable = true;
+
+  # Configuration
   programs.zsh = {
     enable = true;
 
-    # home manager needs to modify .zshrc
-    enableCompletion = true; # TODO: replace with fzf-tab??
+    enableCompletion = true;
     syntaxHighlighting = {
       enable = true;
       highlighters = ["brackets"];
@@ -38,16 +42,13 @@ in {
 
     plugins = with config; [
       # Better up/down-arrow history
+      # TODO: swap for `fzf-history-widget`
       {
         name = "history-substring-search";
         src = ohmyzshPluginSrc "history-substring-search";
       }
 
       # fuzzy-find tab completion
-      # FIXME: fzf's zshell integration seems to be clashing with this plugin??
-      # TODO: integrage with tmux + configure + have the nice preview thingy
-      # TODO: does this supplant other things???
-      #       e.g. completion/autosuggestion/etc??
       {
         name = "fzf-tab";
         src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
@@ -62,7 +63,7 @@ in {
       # Empty-enter executes default commands
       {
         name = "magic-enter";
-        src = ohmyzshPluginSrc "magic-enter";
+        src = ./.;
       }
 
       # Git aliases
@@ -72,17 +73,14 @@ in {
       })
     ];
 
-    initContent = lib.mkMerge [
-      # Configure keybindings to enable navigation
-      (lib.mkAfter (builtins.readFile ./key-bindings.zsh))
+    initContent = with builtins;
+      lib.mkMerge [
+        # Configure keybindings to enable navigation
+        (lib.mkAfter (readFile ./key-bindings.zsh))
 
-      (lib.mkAfter ''
-        # Configure `magic-enter` to use aliases so that `you-should-use` does not complain erroneously
-        MAGIC_ENTER_GIT_COMMAND="gst -u ."          # `git status` => `gst`
-        MAGIC_ENTER_JJ_COMMAND="jj st --no-pager ." # NONE
-        MAGIC_ENTER_OTHER_COMMAND="lsd -lh ."       # NONE
-      '')
-    ];
+        # Configure `fzf-tab` plugin
+        (lib.mkAfter (readFile ./fzf-tab.zsh))
+      ];
 
     # antidote plugins
     # antidote = {
