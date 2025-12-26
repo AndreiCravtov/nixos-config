@@ -41,9 +41,28 @@ in {
     extraGroups = ["networkmanager" "wheel"];
   };
 
-  # Enable home-manager for our user
-  home-manager.users.${username} = {
-    imports = [(self + /configurations/home/${username}.nix)];
+  home-manager = {
+    # Enable home-manager for our user
+    users.${username} = {
+      imports = [(self + /configurations/home/${username}.nix)];
+    };
+
+    # Expose options for user-defined HM modules
+    sharedModules = [
+      ({
+        options,
+        lib,
+        ...
+      }: {
+        options.debug.options = lib.mkOption {
+          default = options;
+          defaultText = lib.literalExpression "options";
+          internal = true;
+          visible = false;
+          readOnly = true;
+        };
+      })
+    ];
   };
 
   # All users can add Nix caches (will merge with other values set elsewhere).

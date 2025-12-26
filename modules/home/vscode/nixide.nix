@@ -5,10 +5,11 @@
   ...
 }: let
   inherit (flake) inputs config;
+  inherit (config) me;
 
   root = inputs.self + /.;
   flakeExpr = "(builtins.getFlake \"${root}\")";
-  nixosConfig = "${flakeExpr}.nixosConfigurations.${config.me.hostName}";
+  nixosConfig = "${flakeExpr}.nixosConfigurations.${me.hostName}";
 
   # Packages needed for this
   nixd = lib.getExe pkgs.nixd;
@@ -47,7 +48,7 @@ in {
 
             # By default there is no home-manager options completion, thus you can add this entry.
             "home-manager" = {
-              "expr" = "${nixosConfig}.options.home-manager.users.type.getSubOptions []";
+              "expr" = "${nixosConfig}.config.home-manager.users.${me.username}.debug.options";
             };
 
             # For flake-parts options.
