@@ -40,3 +40,11 @@ repl:
 [group('dev')]
 dev:
   nix develop
+
+# Manually specify host for bootstrapping
+# TODO: this is a hack for now
+#       SEE: https://github.com/srid/nixos-unified/issues/154
+[group('Hack')]
+run-init host='':
+  nixos-rebuild switch --sudo --flake .#{{host}}
+
