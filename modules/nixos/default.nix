@@ -48,6 +48,7 @@
     gcc
     clang
     rustup
+    neofetch
   ];
 
   # Apply systemwide security hardening

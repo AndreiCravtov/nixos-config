@@ -4,6 +4,7 @@
       name = "nixos-unified-template-shell";
       meta.description = "Shell environment for modifying this Nix configuration";
       packages = with pkgs; [
+        git
         just
         nixd
       ];

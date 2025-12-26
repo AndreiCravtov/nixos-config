@@ -4,8 +4,7 @@
   lib,
   ...
 }: let
-  inherit (flake) inputs config;
-  inherit (inputs.self) homeModules;
+  inherit (flake) config;
 in {
   # A module that automatically imports everything else in the parent folder.
   # NOTE: cannot use `my-util.readDirPaths` due to recursion!!
@@ -17,10 +16,29 @@ in {
   home.packages = with pkgs; [
     omnix
 
+    # General apps
+    signal-desktop
+    telegram-desktop
+    slack
+    inkscape # TODO: change to inkscape-with-extensions??
+    jetbrains-toolbox # TODO: mabye installing them individually is better??
+    rust-analyzer # TODO: maybe just link to where needed, e.g. vscode & nvim repsectvely??
+
+    # Languages with packages
+    # TODO: perhaps break out into their own files??
+    (python313.withPackages (ppkgs: [
+      ppkgs.numpy
+    ]))
+    (ruby.withPackages (ps: [
+      ]))
+
     # Nix dev
     cachix
     nix-info
   ];
+
+  # TODO: configure properly...???
+  programs.obsidian.enable = true;
 
   # Set username based on global config
   home.username = config.me.username;
