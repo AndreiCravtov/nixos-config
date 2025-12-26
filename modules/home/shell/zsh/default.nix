@@ -48,6 +48,12 @@ in {
       }
 
       # fuzzy-find tab completion
+      # FIXME: right now SOMETIMES the tabbing doesn't get hijacked
+      #        there must be something ELSE that is tab-completing FIRST???
+      #        [Docs](https://github.com/Aloxaf/fzf-tab?tab=readme-ov-file#compatibility-with-other-plugins)
+      #        mention that fzf-tab should be LAST in plugin list...
+      #        perhaps `enableCompletion` is latching to `^I` **after** fzf-tab
+      #        which causes those issues??
       {
         name = "fzf-tab";
         src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";

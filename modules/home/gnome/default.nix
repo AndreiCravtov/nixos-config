@@ -17,14 +17,26 @@ in {
 
   # List of extensions to install
   home.packages = with pkgs.gnomeExtensions; [
-    clipboard-history
+    launch-new-instance
     color-picker
     appindicator
-    launch-new-instance
     power-off-options
+    clipboard-history
   ];
 
   dconf.settings = with lib.hm.gvariant; {
+    # Enable GNOME extensions
+    "org/gnome/shell" = {
+      disable-user-extensions = false;
+      enabled-extensions = [
+        "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
+        "color-picker@tuberry"
+        "appindicatorsupport@rgcjonas.gmail.com"
+        "power-off-options@axelitama.github.io"
+        "clipboard-history@alexsaveau.dev"
+      ];
+    };
+
     # GNOME settings app
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
@@ -41,18 +53,6 @@ in {
         (mkTuple ["xkb" "us"])
       ];
       xkb-options = ["compose:rwin"];
-    };
-
-    # Enable GNOME extensions
-    "org/gnome/shell" = {
-      disable-user-extensions = false;
-      enabled-extensions = [
-        "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
-        "color-picker@tuberry"
-        "appindicatorsupport@rgcjonas.gmail.com"
-        "power-off-options@axelitama.github.io"
-        "clipboard-history@alexsaveau.dev"
-      ];
     };
 
     # GNOME nautilus settings

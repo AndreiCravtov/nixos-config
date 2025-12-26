@@ -1,0 +1,21 @@
+diff --git a/src/utils/utils.js b/src/utils/utils.js
+index 05a02c3..c91bd81 100644
+--- a/src/utils/utils.js
++++ b/src/utils/utils.js
+@@ -19,11 +19,16 @@
+  */
+ import GLib from 'gi://GLib';
+ import Gio from 'gi://Gio';
++import GIRepository from "gi://GIRepository?version=3.0";
+ import Config from '../config.js';
+ import Signal from '../signal.js';
+ import CommandSubprocess from './commandSubprocess.js';
+ import CommandHelper from './commandHelper.js';
+ import XMLParser from './xmlParser.js';
++
++const _v3repo = GIRepository.Repository.dup_default();
++_v3repo.prepend_search_path('@gtop_path@');
++
+ class Utils {
+     static init({ service, extension, metadata, settings, ProcessorMonitor, GpuMonitor, MemoryMonitor, StorageMonitor, NetworkMonitor, SensorsMonitor, }) {
+         if (extension)

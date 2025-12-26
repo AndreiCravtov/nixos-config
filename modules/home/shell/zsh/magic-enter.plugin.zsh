@@ -27,26 +27,20 @@ _magic_enter_ysu_suspend_once() {
   local disable_fn enable_fn
 
   # Current upstream names:
-  if (( $+functions[disable_you_should_use] && $+functions[enable_you_should_use] )); then
-    disable_fn=disable_you_should_use
-    enable_fn=enable_you_should_use
-
-  # If you really have these older/alternate names:
-  elif (( $+functions[you_should_use_disable] && $+functions[you_should_use_enable] )); then
-    disable_fn=you_should_use_disable
-    enable_fn=you_should_use_enable
+  if (( $+functions[disable_you_should_use] && $+functions[enable_you_should_use] )); 
+  then
   else
     return 0
   fi
 
-  "$disable_fn"
+  disable_you_should_use
 
   autoload -Uz add-zsh-hook
 
   # one-shot re-enable after the command finishes (next prompt)
   _magic_enter_ysu_resume() {
     add-zsh-hook -d precmd _magic_enter_ysu_resume 2>/dev/null || true
-    "$enable_fn"
+    enable_you_should_use
   }
   add-zsh-hook precmd _magic_enter_ysu_resume
 }

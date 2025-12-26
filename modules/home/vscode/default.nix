@@ -22,6 +22,8 @@ in {
         # https://code.visualstudio.com/docs/getstarted/settings#_settingsjson
         "editor.formatOnSave" = true;
         "workbench.colorTheme" = "Dracula Theme";
+
+        "git.autofetch" = true;
       };
       keybindings = [
         # See https://code.visualstudio.com/docs/getstarted/keybindings#_advanced-customization
@@ -34,6 +36,10 @@ in {
       extensions = with pkgs.vscode-marketplace; [
         dracula-theme.theme-dracula
         gruntfuggly.todo-tree
+
+        # Git
+        mhutchie.git-graph
+        codezombiech.gitignore
       ];
     };
   };

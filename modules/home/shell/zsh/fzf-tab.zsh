@@ -14,6 +14,9 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --icons=always --group-directories-first $realpath'
 zstyle ':fzf-tab:complete:z:*'  fzf-preview 'eza -1 --color=always --icons=always --group-directories-first $realpath'
 
+# TODO: figure out how to add custom autocompletion suggestions,
+#       e.g. how to display options for `just`??
+
 # custom fzf flags
 # NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
 zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept

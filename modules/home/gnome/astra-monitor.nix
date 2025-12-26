@@ -1,34 +1,59 @@
-{pkgs, ...}: {
-  # Install required dependencies
-  home.packages = with pkgs; [
-    nethogs
-    iotop
-    pciutils
-    iw
-    libgtop
-    gtop
-    gnomeExtensions.astra-monitor
-  ];
-
-  # Configure dconf settings
-  dconf.settings = {
-    "org/gnome/shell" = {
-      enabled-extensions = [
-        "monitor@astraext.github.io"
-      ];
-    };
-    "org/gnome/shell/extensions/astra-monitor" = {
-      gpu-header-show = true;
-      memory-header-tooltip-free = true;
-      storage-header-tooltip-value = true;
-      sensors-header-show = true;
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) types mkIf mkOption;
+  cfg = config.gnome.extensions.astra-monitor;
+in {
+  options = {
+    gnome.extensions.astra-monitor = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = ''
+          Whether to enable the Astra Monitor extension on Gnome.
+        '';
+      };
+      enableAmdgpu = mkOption {
+        type = types.bool;
+        default = true; # TODO: maybe in the future, add more sophisticated detection??
+        description = ''
+          Whether to enable `amdgpu` integration for this extension.
+        '';
+      };
     };
   };
+  config = mkIf cfg.enable {
+    # Install required dependencies
+    home.packages = with pkgs; (lib.mkMerge [
+      [
+        gnomeExtensions.astra-monitor
 
-  # SEE: https://github.com/fflewddur/tophat/issues/106#issuecomment-1848319826
-  # TODO: figure out a better way -> either create merge-able path types
-  #       OR patch the corresponding extensions to have these paths set correctly
-  systemd.user.sessionVariables = {
-    GI_TYPELIB_PATH = "${pkgs.libgtop + "/lib/girepository-1.0/"}";
+        # dependencies
+        pciutils
+        nethogs
+        iw
+        iotop
+        #libgtop # TODO: is this even needed??
+      ]
+      (mkIf cfg.enableAmdgpu [amdgpu_top])
+    ]);
+
+    # Configure dconf settings
+    dconf.settings = {
+      "org/gnome/shell" = {
+        enabled-extensions = [
+          "monitor@astraext.github.io"
+        ];
+      };
+      "org/gnome/shell/extensions/astra-monitor" = {
+        gpu-header-show = true;
+        memory-header-tooltip-free = true;
+        storage-header-tooltip-value = true;
+        sensors-header-show = true;
+      };
+    };
   };
 }
