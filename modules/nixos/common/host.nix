@@ -10,6 +10,10 @@
   inherit (inputs.self) nixosConfigurations;
 
   # Check that there is a corresponding NixOS configuration set up for this host.
+  # FIXME: this currently does NOT work for >1 configuration
+  #        e.g. if we have `evilhost` and `framework13` configs and `me.hostName = "framework13"`
+  #             but actually run `nixos-rebuild switch --sudo --flake .#evilhost`
+  #             then the check will ERRONEOUSLY succeed & set `evilhost.networking.hostName = "framework13"`
   ensureConfigExists =
     config.flake.my-util.guardMsg
     (builtins.hasAttr "${hostName}" nixosConfigurations)
