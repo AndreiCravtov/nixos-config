@@ -353,7 +353,8 @@
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixos-unified": "nixos-unified",
         "nixpkgs": "nixpkgs_2",
-        "omnix-pr489": "omnix-pr489"
+        "omnix-pr489": "omnix-pr489",
+        "rust-overlay": "rust-overlay_2"
       }
     },
     "rust-flake": {
@@ -393,6 +394,26 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "5d1865c0da63b4c949f383d982b6b43519946e8f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1766717007,
+        "narHash": "sha256-ZjLiHCHgoH2maP5ZAKn0anrHymbjGOS5/PZqfJUK8Ik=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "a18efe8a9112175e43397cf870fb6bc1ca480548",
         "type": "github"
       },
       "original": {

@@ -16,6 +16,9 @@ in {
   home.packages = with pkgs; [
     omnix
 
+    # Terminal utilities
+    neofetch
+
     # General apps
     signal-desktop
     telegram-desktop

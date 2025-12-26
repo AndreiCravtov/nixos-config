@@ -47,8 +47,7 @@
     gnumake
     gcc
     clang
-    rustup
-    neofetch
+    # rustup # TODO: remove??
   ];
 
   # Apply systemwide security hardening
