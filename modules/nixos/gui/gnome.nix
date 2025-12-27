@@ -30,6 +30,7 @@
     gjs # Some extensions may need this
 
     gnome-tweaks
+    gnome-software
     appeditor
   ];
 

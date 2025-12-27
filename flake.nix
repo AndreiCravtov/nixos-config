@@ -12,6 +12,7 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixos-unified.url = "github:srid/nixos-unified";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     # Software inputs
     nix-index-database = {
