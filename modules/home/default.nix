@@ -24,7 +24,6 @@ in {
     telegram-desktop
     slack
     inkscape # TODO: change to inkscape-with-extensions??
-    jetbrains-toolbox # TODO: mabye installing them individually is better??
     rust-analyzer # TODO: maybe just link to where needed, e.g. vscode & nvim repsectvely??
 
     # Languages with packages

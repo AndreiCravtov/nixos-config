@@ -23,6 +23,7 @@
     #nixvim.inputs.nixpkgs.follows = "nixpkgs";
     #nixvim.inputs.flake-parts.follows = "flake-parts";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-jetbrains-plugins.url = "github:nix-community/nix-jetbrains-plugins";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
