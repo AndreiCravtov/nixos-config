@@ -21,7 +21,6 @@ in {
         # This property will be used to generate settings.json:
         # https://code.visualstudio.com/docs/getstarted/settings#_settingsjson
         "editor.formatOnSave" = true;
-        "workbench.colorTheme" = "Dracula Theme";
 
         "git.autofetch" = true;
       };
@@ -34,7 +33,6 @@ in {
         #}
       ];
       extensions = with pkgs.vscode-marketplace; [
-        dracula-theme.theme-dracula
         gruntfuggly.todo-tree
 
         # Git

@@ -10,7 +10,6 @@
   # Add here the flatpaks you want to install
   services.flatpak.packages = [
     "org.vinegarhq.Sober"
-    "org.localsend.localsend_app"
     #"com.obsproject.Studio"
     #"im.riot.Riot"
   ];

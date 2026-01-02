@@ -39,8 +39,7 @@ in {
     nix-info
   ];
 
-  # TODO: configure properly...???
-  programs.obsidian.enable = true;
+  programs.obsidian.enable = true; # TODO: configure properly...???
 
   # Set username based on global config
   home.username = config.me.username;

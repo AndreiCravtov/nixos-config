@@ -9,6 +9,7 @@
 in {
   options = {
     gnome.extensions.astra-monitor = {
+      # TODO: change to mkEnableOption ??
       enable = mkOption {
         type = types.bool;
         default = true;
@@ -16,6 +17,7 @@ in {
           Whether to enable the Astra Monitor extension on Gnome.
         '';
       };
+
       enableAmdgpu = mkOption {
         type = types.bool;
         default = true; # TODO: maybe in the future, add more sophisticated detection??
