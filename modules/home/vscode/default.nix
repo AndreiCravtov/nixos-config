@@ -60,7 +60,6 @@ in {
         redhat.vscode-xml
         redhat.vscode-yaml
         golang.go # TODO: break out into its own thing ??
-        rust-lang.rust-analyzer # TODO: break out into its own thing ??
       ];
     };
   };
