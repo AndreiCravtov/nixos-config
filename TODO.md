@@ -3,7 +3,6 @@
    OBSERVE how config.nix in handled!!!
  - make a `packages` overlay that simply overlays any packages in the `/packages` folder
    (see nixos-config example for this) + minimal "my hello" package or something (to test)...
- - + https://github.com/lsd-rs/lsd?tab=readme-ov-file#configuring-your-shell-to-use-lsd-instead-of-ls-optional
  - figure out a way to configure Brave browser extensions installation with `brave/policies/managed/chrome-policies.json`
  - + for now we are stuck with no default extensions & having to copy everything from some kind of backup
  - + IF I EVER end up needing e.g. `vimium` then I HAVE to figure out a way to get it up and running...
@@ -18,10 +17,6 @@
 
 ### Shell
  - Nushell ?????
-
-### VSCode
- - keep configuring VSCode in general
- - + default shell `zsh`
 
 ### Language toolchains
  - haskell/python(IDLE editor)/ruby/go/android/nargo??/lean4/pnpm/ocaml
@@ -51,30 +46,6 @@
 ## Partially DONE
  - DONE: set up SSH + Git
  - + maybe better way with [agenix](https://github.com/ryantm/agenix)??
-
- ---
-
-# OLD TODO
-- IDE apps
-
-Issues:
-- random connectivity issues with wifi...
-- bluetooth issues
-- wired mice issues: right-click working incorrectly
-- middle mouse not closing tabs...
-- desktop icons not working...
-- maybe not use rustup?? or make it more declarative??
-- brightness of screen not working??
-- telegram-desktop installed but not working ????
-
----
-Imperative log:
-- brave
-- + extensions & their settings
-- + defautlt settings like search enginelast
-- gnome
-- + power mode configs
-- intellij toolbox installed (TODO: re-do everything declaritively)
 
 # Read later
  - [Dependency management](https://tsawyer87.github.io/posts/declarative_depinject/)
