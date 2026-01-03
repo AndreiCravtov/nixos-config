@@ -24,6 +24,7 @@ in {
     telegram-desktop
     slack
     inkscape # TODO: change to inkscape-with-extensions??
+    krita
     rust-analyzer # TODO: maybe just link to where needed, e.g. vscode & nvim repsectvely??
 
     # Languages with packages

@@ -34,10 +34,33 @@ in {
       ];
       extensions = with pkgs.vscode-marketplace; [
         gruntfuggly.todo-tree
+        streetsidesoftware.code-spell-checker
+        antfu.browse-lite
+        fill-labs.dependi
+        mkhl.direnv
+        usernamehw.errorlens
+        tomoki1207.pdf
 
-        # Git
+        # Git # TODO: break out into its own thing ??
         mhutchie.git-graph
         codezombiech.gitignore
+        github.vscode-pull-request-github
+        waderyan.gitblame
+
+        # language support
+        myriad-dreamin.tinymist
+        tamasfe.even-better-toml
+        leanprover.lean4
+        yzhang.markdown-all-in-one
+        noir-lang.vscode-noir
+        ocamllabs.ocaml-platform
+        jebbs.plantuml
+        arthurwang.vsc-prolog
+        treborhuang.vscode-forester
+        redhat.vscode-xml
+        redhat.vscode-yaml
+        golang.go # TODO: break out into its own thing ??
+        rust-lang.rust-analyzer # TODO: break out into its own thing ??
       ];
     };
   };
