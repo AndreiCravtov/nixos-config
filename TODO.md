@@ -12,8 +12,7 @@
  - + maybe make "super-modules" that touch __both__ home configurations AND nixos configurations?? It would __obviously__ have to be a NixOS module in that case which simply reaches into `home-manager.users.${username}.<HOME-MANAGER-SETTINGS>` when necessary??
  - Declarative Glove80 config generation...??
  - Make `root` user have SOME of the niceties of `home user`??
- - Gnome extensions
- - + make DING work (it doesn't)
+ - Discord (vencord)
 
 ### Shell
  - Nushell ?????
@@ -46,6 +45,8 @@
 ## Partially DONE
  - DONE: set up SSH + Git
  - + maybe better way with [agenix](https://github.com/ryantm/agenix)??
+ - Gnome extensions
+ - + make DING work (it doesn't)
 
 # Read later
  - [Dependency management](https://tsawyer87.github.io/posts/declarative_depinject/)

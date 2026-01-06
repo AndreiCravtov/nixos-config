@@ -29,9 +29,12 @@ in {
 
     # Languages with packages
     # TODO: perhaps break out into their own files??
-    (python313.withPackages (ppkgs: [
-      ppkgs.numpy
-    ]))
+    (python313.withPackages (p:
+      with p; [
+        numpy
+        tkinter
+      ]))
+
     (ruby.withPackages (ps: [
       ]))
 
