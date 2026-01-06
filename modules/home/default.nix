@@ -28,13 +28,6 @@ in {
     rust-analyzer # TODO: maybe just link to where needed, e.g. vscode & nvim repsectvely??
 
     # Languages with packages
-    # TODO: perhaps break out into their own files??
-    (python313.withPackages (p:
-      with p; [
-        numpy
-        tkinter
-      ]))
-
     (ruby.withPackages (ps: [
       ]))
 
