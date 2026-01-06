@@ -11,13 +11,21 @@
     repo = "kitty-icon";
     rev = "7f631a61bcbdfb268cdf1c97992a5c077beec9d6";
     sha256 = "sha256-AXU1KOXaEiAMTkgkR+yVc8g4FZq8TqXj9imswCHhNKc=";
-  }}/kitty.iconset";
+  }}/src/neue_outrun";
 in {
-  # Install custom Kitty Icons
+  # Install custom Kitty Icons #TODO: is this even correct ??
   xdg.dataFile."icons/hicolor/16x16/apps/kitty.png".source = "${kittyIcons}/icon_16x16.png";
+  xdg.dataFile."icons/hicolor/16x16@2/apps/kitty.png".source = "${kittyIcons}/icon_16x16@2x.png";
   xdg.dataFile."icons/hicolor/32x32/apps/kitty.png".source = "${kittyIcons}/icon_32x32.png";
+  xdg.dataFile."icons/hicolor/32x32@2/apps/kitty.png".source = "${kittyIcons}/icon_32x32@2x.png";
   xdg.dataFile."icons/hicolor/128x128/apps/kitty.png".source = "${kittyIcons}/icon_128x128.png";
+  xdg.dataFile."icons/hicolor/128x128@2/apps/kitty.png".source = "${kittyIcons}/icon_128x128@2x.png";
   xdg.dataFile."icons/hicolor/256x256/apps/kitty.png".source = "${kittyIcons}/icon_256x256.png";
+  xdg.dataFile."icons/hicolor/256x256@2/apps/kitty.png".source = "${kittyIcons}/icon_256x256@2x.png";
+  xdg.dataFile."icons/hicolor/512x512/apps/kitty.png".source = "${kittyIcons}/icon_512x512.png";
+  xdg.dataFile."icons/hicolor/512x512@2/apps/kitty.png".source = "${kittyIcons}/icon_512x512@2x.png";
+  # Reuse larger ones for those sizes that don't exist
+  xdg.dataFile."icons/hicolor/scalable/apps/kitty.png".source = "${kittyIcons}/icon_512x512.png";
 
   # Configure Kitty
   programs.kitty = {
