@@ -6,11 +6,20 @@
   ...
 }: let
   inherit (flake.config.flake) my-util;
+  kittyIcons = "${pkgs.fetchFromGitHub {
+    owner = "k0nserv";
+    repo = "kitty-icon";
+    rev = "7f631a61bcbdfb268cdf1c97992a5c077beec9d6";
+    sha256 = "sha256-AXU1KOXaEiAMTkgkR+yVc8g4FZq8TqXj9imswCHhNKc=";
+  }}/kitty.iconset";
 in {
-  # A module that automatically imports everything else in the parent folder.
-  # NOTE: cannot use `my-util.readDirPaths` due to recursion!!
-  imports = my-util.readDirPaths {readPath = ./.;};
+  # Install custom Kitty Icons
+  xdg.dataFile."icons/hicolor/16x16/apps/kitty.png".source = "${kittyIcons}/icon_16x16.png";
+  xdg.dataFile."icons/hicolor/32x32/apps/kitty.png".source = "${kittyIcons}/icon_32x32.png";
+  xdg.dataFile."icons/hicolor/128x128/apps/kitty.png".source = "${kittyIcons}/icon_128x128.png";
+  xdg.dataFile."icons/hicolor/256x256/apps/kitty.png".source = "${kittyIcons}/icon_256x256.png";
 
+  # Configure Kitty
   programs.kitty = {
     enable = true;
 
@@ -111,9 +120,7 @@ in {
   xdg.terminal-exec = {
     enable = true;
     settings = {
-      default = [
-        "kitty.desktop"
-      ];
+      default = ["kitty.desktop"];
     };
   };
 
