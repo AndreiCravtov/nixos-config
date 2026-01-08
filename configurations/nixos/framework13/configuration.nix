@@ -40,7 +40,7 @@
     wifi = {
       powersave = false;
       backend = "iwd";
-      # macAddress = "stable-ssid";
+      macAddress = "stable-ssid";
     };
   };
 

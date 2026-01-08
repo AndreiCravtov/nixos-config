@@ -47,10 +47,16 @@ in {
       enable = true; # Type `<ctrl> + r` to fuzzy search your shell history
       # TODO: further config ?? themes ?? settings ??
     };
+
+    # TODO: move to own file & develop the config
+    nushell = {
+      enable = true;
+    };
   };
 
   programs = {
     # Better shell prompt!
+    # TODO: move out to its own file
     starship = {
       enable = true;
       enableBashIntegration = false; # bash doesn't work well with this

@@ -25,6 +25,7 @@
       # Add applications we want to blur
       whitelist = lib.mkMerge [
         (lib.mkIf config.programs.kitty.enable ["kitty"])
+        (lib.mkIf config.programs.nixcord.equibop.enable ["equibop"])
         # TODO: add `vesktop` after vesktop has been configured too!!
       ];
     };

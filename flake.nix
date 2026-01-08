@@ -33,6 +33,7 @@
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixcord.url = "github:kaylorben/nixcord";
 
     # Transient inputs for patching
     omnix-pr489.url = "github:juspay/omnix/0a0dfd462c182e2421cfa8f0d3a511003ab810a0"; # See https://github.com/juspay/omnix/pull/489

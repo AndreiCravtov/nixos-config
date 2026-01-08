@@ -63,9 +63,6 @@ in {
         };
       };
 
-      # Cannot find `awk` otherwise...??
-      systemd.services.auto-cpufreq.path = with pkgs; [gawk];
-
       # auto-cpufreq is incompatible with power-profiles-daemon & tlp
       services.power-profiles-daemon.enable = false;
       services.tlp.enable = false;
