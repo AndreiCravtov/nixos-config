@@ -6,12 +6,7 @@
 }: let
   clearVisionV7 = {
     name = "ClearVision-v7";
-    text = builtins.readFile "${pkgs.fetchFromGitHub {
-      owner = "ClearVision";
-      repo = "ClearVision-v7";
-      rev = "7.0.1-vc";
-      sha256 = "sha256-ksF6HgrfCAvJcp3UV8SON1rf1xCZbUjDrRb8eryMOr0=";
-    }}/ClearVision-v7-Vencord.css";
+    text = builtins.readFile ./theme.css;
   };
 in {
   imports = [flake.inputs.nixcord.homeModules.nixcord];
