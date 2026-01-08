@@ -16,12 +16,6 @@
   services = {
     # Enable SSH systemwide
     openssh.enable = true;
-
-    # Enable firmware updates
-    fwupd.enable = true;
-
-    # Enable lldpd for LLDP discovery
-    lldpd.enable = true;
   };
 
   programs = {

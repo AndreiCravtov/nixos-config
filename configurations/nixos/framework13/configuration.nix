@@ -1,16 +1,22 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ 
-  config, 
-  pkgs, 
-  lib, 
-  ... 
+{
+  config,
+  pkgs,
+  lib,
+  ...
 }: {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
+
+  # Framework-specific hardware config
+  hardware.framework = {
+    enableKmod = true;
+    laptop13.audioEnhancement.enable = true;
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -26,7 +32,17 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+
+    # Apparently [this](https://www.reddit.com/r/NixOS/comments/1nw5p44/comment/ni3rcf1)
+    # fixes the weird wifi disconnections ??https://www.reddit.com/r/NixOS/comments/1nw5p44/comment/ni3rcf1/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+    wifi = {
+      powersave = false;
+      backend = "iwd";
+      # macAddress = "stable-ssid";
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/London";
@@ -58,6 +74,9 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enable Laptop Mode for power saving
+  laptop.enable = true;
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -87,7 +106,7 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-  
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -101,5 +120,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }

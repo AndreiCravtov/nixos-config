@@ -15,6 +15,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     # Software inputs
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,6 +27,10 @@
     nix-jetbrains-plugins.url = "github:nix-community/nix-jetbrains-plugins";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    auto-cpufreq = {
+      url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

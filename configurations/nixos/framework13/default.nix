@@ -7,6 +7,10 @@ in {
   imports = [
     self.nixosModules.default
     self.nixosModules.gui
+
+    # TODO: if I ever upgrade CPUs, change this??
+    inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
+
     ./configuration.nix
   ];
 }
