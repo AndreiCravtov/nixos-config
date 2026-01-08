@@ -25,42 +25,50 @@ in {
       };
     };
   };
-  config = lib.mkIf cfg.enable {
-    programs.auto-cpufreq = {
-      enable = cfg.enablePowerSaving;
+  config = lib.mkIf cfg.enable (lib.mkMerge [
+    (lib.mkIf cfg.enablePowerSaving {
+      programs.auto-cpufreq = {
+        enable = true;
 
-      # SEE: https://github.com/AdnanHodzic/auto-cpufreq/blob/master/auto-cpufreq.conf-example
-      settings = {
-        charger = {
-          governor = "performance";
-          energy_performance_preference = "performance";
-          platform_profile = "performance";
-          turbo = "auto";
-        };
+        # SEE: https://github.com/AdnanHodzic/auto-cpufreq/blob/master/auto-cpufreq.conf-example
+        settings = {
+          charger = {
+            governor = "performance";
+            energy_performance_preference = "performance";
+            energy_perf_bias = "performance";
+            platform_profile = "performance";
+            turbo = "always";
+          };
 
-        # this is for ignoring controllers and other connected devices battery from affecting
-        # laptop preformence
-        power_supply_ignore_list = {
-          # name1 = this;
-          # name2 = is;
-          # name3 = an;
-          # name4 = example;
-        };
+          # this is for ignoring controllers and other connected devices battery from affecting
+          # laptop performance
+          # power_supply_ignore_list = {
+          #   name1 = "this";
+          #   name2 = "is";
+          #   name3 = "an";
+          #   name4 = "example";
+          # };
 
-        battery = {
-          # Specify which battery device to use for reading battery information. see available batteries by running: ls /sys/class/power_supply/
-          # If not set, auto-cpufreq will automatically detect and use the first battery found
-          # battery_device = "BAT1";
+          battery = {
+            # Specify which battery device to use for reading battery information. see available batteries by running: ls /sys/class/power_supply/
+            # If not set, auto-cpufreq will automatically detect and use the first battery found
+            # battery_device = BAT1;
 
-          governor = "powersave";
-          energy_performance_preference = "power";
-          platform_profile = "low-power";
-          turbo = "auto";
+            governor = "powersave";
+            energy_performance_preference = "power";
+            energy_perf_bias = "power";
+            platform_profile = "low-power";
+            turbo = "never";
+          };
         };
       };
-    };
 
-    # auto-cpufreq is incompatible with power-profiles-daemon
-    services.power-profiles-daemon.enable = !cfg.enablePowerSaving;
-  };
+      # Cannot find `awk` otherwise...??
+      systemd.services.auto-cpufreq.path = with pkgs; [gawk];
+
+      # auto-cpufreq is incompatible with power-profiles-daemon & tlp
+      services.power-profiles-daemon.enable = false;
+      services.tlp.enable = false;
+    })
+  ]);
 }
