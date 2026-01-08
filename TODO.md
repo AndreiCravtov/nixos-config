@@ -12,7 +12,7 @@
  - + maybe make "super-modules" that touch __both__ home configurations AND nixos configurations?? It would __obviously__ have to be a NixOS module in that case which simply reaches into `home-manager.users.${username}.<HOME-MANAGER-SETTINGS>` when necessary??
  - Declarative Glove80 config generation...??
  - Make `root` user have SOME of the niceties of `home user`??
- - Discord (vencord)
+ - As I begin theming more things, I want to create a Nix-ified theming solution for unified consistency ???
 
 ### Shell
  - Nushell ?????
