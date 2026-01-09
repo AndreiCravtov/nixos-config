@@ -12,6 +12,9 @@
     "org/gnome/shell/extensions/clipboard-indicator" = {
       clear-history-on-interval = true;
       clear-history-interval = 5;
+      clear-on-boot = true;
+      notify-on-cycle = false;
+      confirm-clear = false;
     };
   };
 }

@@ -5,8 +5,7 @@
     inputs.nixos-unified.flakeModules.autoWire
   ];
 
-  # Allows nixd completions
-  debug = true;
+  debug = true; # Allows nixd completions
 
   perSystem = {
     self',
@@ -32,10 +31,18 @@
       overlays = lib.attrValues inputs.self.overlays;
     };
 
-    # For 'nix fmt'
-    formatter = pkgs.alejandra;
-
-    # Enables 'nix run' to activate.
-    packages.default = self'.packages.activate;
+    formatter = pkgs.alejandra; # For 'nix fmt'
+    packages.default = self'.packages.activate; # Enables 'nix run' to activate.
+    nixos-unified.primary-inputs = [
+      "nixpkgs"
+      "nixos-hardware"
+      # "nix-darwin"
+      "home-manager"
+      "flake-parts"
+      "nixos-unified"
+      "nix-flatpak"
+      "nix-vscode-extensions"
+      "nix-jetbrains-plugins"
+    ];
   };
 }

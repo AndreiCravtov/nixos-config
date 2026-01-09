@@ -45,11 +45,15 @@
     gnumake
     gcc
     clang
-    # rustup # TODO: remove??
   ];
 
   # Apply systemwide security hardening
   security = lib.optionalAttrs pkgs.stdenv.isLinux {
     sudo.execWheelOnly = true;
+  };
+
+  # System-wide environment variables
+  environment.variables = {
+    SYSTEMD_LESS = "FRXMK"; # Make systemd pager wrap
   };
 }

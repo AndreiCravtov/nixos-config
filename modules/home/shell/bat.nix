@@ -1,5 +1,9 @@
 # Better `cat`
 {pkgs, ...}: {
+  home.sessionVariables = {
+    PAGER = "bat";
+  };
+
   home.shellAliases = {
     cat = "bat --paging=never";
     man = "batman";
