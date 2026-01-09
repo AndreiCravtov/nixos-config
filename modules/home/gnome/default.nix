@@ -19,9 +19,8 @@ in {
   home.packages = with pkgs.gnomeExtensions; [
     launch-new-instance
     color-picker
-    appindicator
     power-off-options
-    clipboard-history
+    status-area-horizontal-spacing
   ];
 
   dconf.settings = with lib.hm.gvariant; {
@@ -31,9 +30,8 @@ in {
       enabled-extensions = [
         "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
         "color-picker@tuberry"
-        "appindicatorsupport@rgcjonas.gmail.com"
         "power-off-options@axelitama.github.io"
-        "clipboard-history@alexsaveau.dev"
+        "status-area-horizontal-spacing@mathematical.coffee.gmail.com"
       ];
     };
 

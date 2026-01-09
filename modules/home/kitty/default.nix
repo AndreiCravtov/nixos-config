@@ -123,6 +123,11 @@ in {
     };
   };
 
+  # Shell aliases for kittens
+  home.shellAliases = {
+    icat = "kitten icat";
+  };
+
   # Make default XDG terminal
   # TODO: maybe gate behind "make default" option??
   xdg.terminal-exec = {

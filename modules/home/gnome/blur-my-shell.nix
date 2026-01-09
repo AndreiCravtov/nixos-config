@@ -5,9 +5,7 @@
   ...
 }: {
   # Install required dependencies
-  home.packages = with pkgs; [
-    gnomeExtensions.blur-my-shell
-  ];
+  home.packages = with pkgs; [gnomeExtensions.blur-my-shell];
 
   # Configure dconf settings
   dconf.settings = {

@@ -47,7 +47,6 @@
  - + maybe better way with [agenix](https://github.com/ryantm/agenix)??
  - Gnome extensions
  - + make DING work (it doesn't)
- - + All the extensions made the top-bar push the battery icon offscreen!! UI BUG!!
 
 # Read later
  - [Dependency management](https://tsawyer87.github.io/posts/declarative_depinject/)
