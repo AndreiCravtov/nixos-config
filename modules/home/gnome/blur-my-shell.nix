@@ -9,11 +9,8 @@
 
   # Configure dconf settings
   dconf.settings = {
-    "org/gnome/shell" = {
-      enabled-extensions = [
-        "blur-my-shell@aunetx"
-      ];
-    };
+    "org/gnome/shell".enabled-extensions = ["blur-my-shell@aunetx"];
+    "org/gnome/shell/extensions/blur-my-shell/dash-to-dock".style-dash-to-dock = 1;
     "org/gnome/shell/extensions/blur-my-shell/applications" = {
       blur = true;
       opacity = 255;
@@ -24,7 +21,6 @@
       whitelist = lib.mkMerge [
         (lib.mkIf config.programs.kitty.enable ["kitty"])
         (lib.mkIf config.programs.nixcord.equibop.enable ["equibop"])
-        # TODO: add `vesktop` after vesktop has been configured too!!
       ];
     };
   };
