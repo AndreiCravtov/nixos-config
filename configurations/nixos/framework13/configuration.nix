@@ -74,8 +74,16 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable Laptop Mode for power saving
-  laptop.enable = true;
+  # Enable Laptop Mode for power saving & other things
+  laptop = {
+    enable = true;
+
+    # Enable keyboard disabling program
+    disable-internal-kbd = {
+      enable = true;
+      internalKbd = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
+    };
+  };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;

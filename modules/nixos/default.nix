@@ -37,6 +37,7 @@
 
   # Systemwide packages to install
   environment.systemPackages = with pkgs; [
+    evtest
     usbutils
     lshw
     wget

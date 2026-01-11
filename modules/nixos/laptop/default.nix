@@ -10,6 +10,7 @@
 in {
   imports = [
     flake.inputs.auto-cpufreq.nixosModules.default
+    ./disable-internal-kbd.nix
   ];
   options = {
     laptop = {

@@ -16,7 +16,7 @@
     gnome-calendar
     gnome-weather
     gnome-maps
-    yelp # Help view
+    #yelp # Help view - I actually needed it for something LOL
     gnome-characters # Utility to help find unusual charaters
     gnome-contacts
     epiphany # Web browser
